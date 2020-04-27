@@ -137,8 +137,8 @@ func resourceAwsS3BucketAnalyticsConfigurationPut(d *schema.ResourceData, meta i
 	}
 
 	input := &s3.PutBucketAnalyticsConfigurationInput{
-		Bucket:                 aws.String(bucket),
-		Id:                     aws.String(name),
+		Bucket: aws.String(bucket),
+		Id:     aws.String(name),
 		AnalyticsConfiguration: analyticsConfiguration,
 	}
 

@@ -141,7 +141,7 @@ func expandWebhookFilterData(data map[string]interface{}) []*codebuild.WebhookFi
 	for i, filterConfig := range filterConfigs {
 		filter := filterConfig.(map[string]interface{})
 		filters = append(filters, &codebuild.WebhookFilter{
-			Type:                  aws.String(filter["type"].(string)),
+			Type: aws.String(filter["type"].(string)),
 			ExcludeMatchedPattern: aws.Bool(filter["exclude_matched_pattern"].(bool)),
 		})
 		if v := filter["pattern"]; v != nil {

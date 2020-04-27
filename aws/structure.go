@@ -161,6 +161,29 @@ func expandEcsVolumes(configured []interface{}) ([]*ecs.Volume, error) {
 			if v, ok := config["root_directory"].(string); ok && v != "" {
 				l.EfsVolumeConfiguration.RootDirectory = aws.String(v)
 			}
+
+			if v, ok := config["transit_encryption"].(string); ok && v != "" {
+				l.EfsVolumeConfiguration.TransitEncryption = aws.String(v)
+			}
+
+			if v, ok := config["transit_encryption_port"].(int); ok && v != 0 {
+				l.EfsVolumeConfiguration.TransitEncryptionPort = aws.Int64(int64(v))
+			}
+
+			if v, ok := config["access_point_id"].(string); ok && v != "" {
+				l.EfsVolumeConfiguration.AuthorizationConfig = &ecs.EFSAuthorizationConfig{}
+
+				l.EfsVolumeConfiguration.AuthorizationConfig.AccessPointId = aws.String(v)
+			}
+
+			if v, ok := config["iam"].(string); ok && v != "" {
+
+				if l.EfsVolumeConfiguration.AuthorizationConfig == nil {
+					l.EfsVolumeConfiguration.AuthorizationConfig = &ecs.EFSAuthorizationConfig{}
+				}
+
+				l.EfsVolumeConfiguration.AuthorizationConfig.Iam = aws.String(v)
+			}
 		}
 
 		volumes = append(volumes, l)
@@ -701,7 +724,7 @@ func flattenEcsVolumes(list []*ecs.Volume) []map[string]interface{} {
 			l["docker_volume_configuration"] = flattenDockerVolumeConfiguration(volume.DockerVolumeConfiguration)
 		}
 
-		if volume.DockerVolumeConfiguration != nil {
+		if volume.EfsVolumeConfiguration != nil {
 			l["efs_volume_configuration"] = flattenEFSVolumeConfiguration(volume.EfsVolumeConfiguration)
 		}
 
@@ -748,6 +771,25 @@ func flattenEFSVolumeConfiguration(config *ecs.EFSVolumeConfiguration) []interfa
 
 		if v := config.RootDirectory; v != nil {
 			m["root_directory"] = aws.StringValue(v)
+		}
+
+		if v := config.TransitEncryption; v != nil {
+			m["transit_encryption"] = aws.StringValue(v)
+		}
+
+		if v := config.TransitEncryptionPort; v != nil {
+			m["transit_encryption_port"] = aws.Int64Value(v)
+		}
+
+		if v := config.AuthorizationConfig; v != nil {
+
+			if c := v.AccessPointId; c != nil {
+				m["access_point_id"] = aws.StringValue(c)
+			}
+
+			if c := v.Iam; c != nil {
+				m["iam"] = aws.StringValue(c)
+			}
 		}
 	}
 
@@ -972,6 +1014,16 @@ func expandStringList(configured []interface{}) []*string {
 	return vs
 }
 
+// Takes the result of flatmap.Expand for an array of int64
+// and returns a []*int64
+func expandInt64List(configured []interface{}) []*int64 {
+	vs := make([]*int64, 0, len(configured))
+	for _, v := range configured {
+		vs = append(vs, aws.Int64(int64(v.(int))))
+	}
+	return vs
+}
+
 // Expands a map of string to interface to a map of string to *float
 func expandFloat64Map(m map[string]interface{}) map[string]*float64 {
 	float64Map := make(map[string]*float64, len(m))
@@ -984,6 +1036,11 @@ func expandFloat64Map(m map[string]interface{}) map[string]*float64 {
 // Takes the result of schema.Set of strings and returns a []*string
 func expandStringSet(configured *schema.Set) []*string {
 	return expandStringList(configured.List())
+}
+
+// Takes the result of schema.Set of strings and returns a []*int64
+func expandInt64Set(configured *schema.Set) []*int64 {
+	return expandInt64List(configured.List())
 }
 
 // Takes list of pointers to strings. Expand to an array

@@ -90,8 +90,8 @@ func resourceAwsGuardDutyDetectorUpdate(d *schema.ResourceData, meta interface{}
 	conn := meta.(*AWSClient).guarddutyconn
 
 	input := guardduty.UpdateDetectorInput{
-		DetectorId:                 aws.String(d.Id()),
-		Enable:                     aws.Bool(d.Get("enable").(bool)),
+		DetectorId: aws.String(d.Id()),
+		Enable:     aws.Bool(d.Get("enable").(bool)),
 		FindingPublishingFrequency: aws.String(d.Get("finding_publishing_frequency").(string)),
 	}
 

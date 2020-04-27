@@ -94,7 +94,7 @@ func resourceAwsAppsyncResolverCreate(d *schema.ResourceData, meta interface{}) 
 		FieldName:               aws.String(d.Get("field").(string)),
 		RequestMappingTemplate:  aws.String(d.Get("request_template").(string)),
 		ResponseMappingTemplate: aws.String(d.Get("response_template").(string)),
-		Kind:                    aws.String(d.Get("kind").(string)),
+		Kind: aws.String(d.Get("kind").(string)),
 	}
 
 	if v, ok := d.GetOk("data_source"); ok {
@@ -177,7 +177,7 @@ func resourceAwsAppsyncResolverUpdate(d *schema.ResourceData, meta interface{}) 
 		TypeName:                aws.String(d.Get("type").(string)),
 		RequestMappingTemplate:  aws.String(d.Get("request_template").(string)),
 		ResponseMappingTemplate: aws.String(d.Get("response_template").(string)),
-		Kind:                    aws.String(d.Get("kind").(string)),
+		Kind: aws.String(d.Get("kind").(string)),
 	}
 
 	if v, ok := d.GetOk("data_source"); ok {

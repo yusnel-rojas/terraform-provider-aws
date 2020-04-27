@@ -434,8 +434,8 @@ func flattenFsxSelfManagedActiveDirectoryConfiguration(d *schema.ResourceData, a
 		"domain_name":                            aws.StringValue(adopts.DomainName),
 		"file_system_administrators_group":       aws.StringValue(adopts.FileSystemAdministratorsGroup),
 		"organizational_unit_distinguished_name": aws.StringValue(adopts.OrganizationalUnitDistinguishedName),
-		"password":                               d.Get("self_managed_active_directory.0.password").(string),
-		"username":                               aws.StringValue(adopts.UserName),
+		"password": d.Get("self_managed_active_directory.0.password").(string),
+		"username": aws.StringValue(adopts.UserName),
 	}
 
 	return []map[string]interface{}{m}

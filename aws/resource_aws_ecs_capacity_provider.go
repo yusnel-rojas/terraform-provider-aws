@@ -107,7 +107,7 @@ func resourceAwsEcsCapacityProviderCreate(d *schema.ResourceData, meta interface
 	conn := meta.(*AWSClient).ecsconn
 
 	input := ecs.CreateCapacityProviderInput{
-		Name:                     aws.String(d.Get("name").(string)),
+		Name: aws.String(d.Get("name").(string)),
 		AutoScalingGroupProvider: expandAutoScalingGroupProvider(d.Get("auto_scaling_group_provider")),
 	}
 

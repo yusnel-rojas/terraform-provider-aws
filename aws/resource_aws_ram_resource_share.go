@@ -54,7 +54,7 @@ func resourceAwsRamResourceShareCreate(d *schema.ResourceData, meta interface{})
 	conn := meta.(*AWSClient).ramconn
 
 	request := &ram.CreateResourceShareInput{
-		Name:                    aws.String(d.Get("name").(string)),
+		Name: aws.String(d.Get("name").(string)),
 		AllowExternalPrincipals: aws.Bool(d.Get("allow_external_principals").(bool)),
 	}
 
@@ -133,8 +133,8 @@ func resourceAwsRamResourceShareUpdate(d *schema.ResourceData, meta interface{})
 
 	if d.HasChange("name") || d.HasChange("allow_external_principals") {
 		request := &ram.UpdateResourceShareInput{
-			ResourceShareArn:        aws.String(d.Id()),
-			Name:                    aws.String(d.Get("name").(string)),
+			ResourceShareArn: aws.String(d.Id()),
+			Name:             aws.String(d.Get("name").(string)),
 			AllowExternalPrincipals: aws.Bool(d.Get("allow_external_principals").(bool)),
 		}
 

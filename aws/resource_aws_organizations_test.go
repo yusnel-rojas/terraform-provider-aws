@@ -7,7 +7,7 @@ import (
 func TestAccAWSOrganizations(t *testing.T) {
 	testCases := map[string]map[string]func(t *testing.T){
 		"Organization": {
-			"basic":                      testAccAwsOrganizationsOrganization_basic,
+			"basic": testAccAwsOrganizationsOrganization_basic,
 			"AwsServiceAccessPrincipals": testAccAwsOrganizationsOrganization_AwsServiceAccessPrincipals,
 			"EnabledPolicyTypes":         testAccAwsOrganizationsOrganization_EnabledPolicyTypes,
 			"FeatureSet":                 testAccAwsOrganizationsOrganization_FeatureSet,

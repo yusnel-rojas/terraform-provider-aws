@@ -443,7 +443,7 @@ func resourceAwsEc2FleetUpdate(d *schema.ResourceData, meta interface{}) error {
 
 	input := &ec2.ModifyFleetInput{
 		ExcessCapacityTerminationPolicy: aws.String(d.Get("excess_capacity_termination_policy").(string)),
-		FleetId:                         aws.String(d.Id()),
+		FleetId: aws.String(d.Id()),
 		// InvalidTargetCapacitySpecification: Currently we only support total target capacity modification.
 		// TargetCapacitySpecification: expandEc2TargetCapacitySpecificationRequest(d.Get("target_capacity_specification").([]interface{})),
 		TargetCapacitySpecification: &ec2.TargetCapacitySpecificationRequest{

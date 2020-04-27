@@ -1950,7 +1950,7 @@ func TestAWSCodeDeployDeploymentGroup_expandBlueGreenDeploymentConfig(t *testing
 
 			"terminate_blue_instances_on_deployment_success": []interface{}{
 				map[string]interface{}{
-					"action":                           "TERMINATE",
+					"action": "TERMINATE",
 					"termination_wait_time_in_minutes": 90,
 				},
 			},
@@ -1968,7 +1968,7 @@ func TestAWSCodeDeployDeploymentGroup_expandBlueGreenDeploymentConfig(t *testing
 		},
 
 		TerminateBlueInstancesOnDeploymentSuccess: &codedeploy.BlueInstanceTerminationOption{
-			Action:                       aws.String("TERMINATE"),
+			Action: aws.String("TERMINATE"),
 			TerminationWaitTimeInMinutes: aws.Int64(90),
 		},
 	}
@@ -1993,7 +1993,7 @@ func TestAWSCodeDeployDeploymentGroup_flattenBlueGreenDeploymentConfig(t *testin
 		},
 
 		TerminateBlueInstancesOnDeploymentSuccess: &codedeploy.BlueInstanceTerminationOption{
-			Action:                       aws.String("KEEP_ALIVE"),
+			Action: aws.String("KEEP_ALIVE"),
 			TerminationWaitTimeInMinutes: aws.Int64(90),
 		},
 	}
@@ -2014,7 +2014,7 @@ func TestAWSCodeDeployDeploymentGroup_flattenBlueGreenDeploymentConfig(t *testin
 
 		"terminate_blue_instances_on_deployment_success": []map[string]interface{}{
 			{
-				"action":                           "KEEP_ALIVE",
+				"action": "KEEP_ALIVE",
 				"termination_wait_time_in_minutes": 90,
 			},
 		},

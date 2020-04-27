@@ -13,6 +13,39 @@ Manages a revision of an ECS task definition to be used in `aws_ecs_service`.
 ## Example Usage
 
 ```hcl
+resource "aws_efs_file_system" "fs" {
+
+  tags = {
+    Name = "fs"
+  }
+}
+
+resource "aws_efs_mount_target" "fs_mount" {
+  file_system_id = aws_efs_file_system.apfs.id
+  subnet_id      = aws_subnet.private.id
+
+  security_groups  = [aws_security_group.efs.id]
+}
+
+resource "aws_efs_access_point" "data" {
+
+  file_system_id = aws_efs_file_system.fs.id
+
+  root_directory {
+    path = "/data"
+
+    creation_info {
+        owner_gid = 101
+        owner_uid = 101
+        permissions = 755
+    }
+  }
+
+  tags = {
+    Name = "data-fs"
+  }
+}
+
 resource "aws_ecs_task_definition" "service" {
   family                = "service"
   container_definitions = file("task-definitions/service.json")
@@ -20,6 +53,14 @@ resource "aws_ecs_task_definition" "service" {
   volume {
     name      = "service-storage"
     host_path = "/ecs/service-storage"
+    
+    efs_volume_configuration {
+      file_system_id = aws_efs_file_system.fs.id
+      transit_encryption = "ENABLED"
+
+      access_point_id = aws_efs_access_point.data.id
+      iam = "DISABLED"
+    }
   }
 
   placement_constraints {

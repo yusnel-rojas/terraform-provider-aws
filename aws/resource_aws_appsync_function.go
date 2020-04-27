@@ -82,10 +82,10 @@ func resourceAwsAppsyncFunctionCreate(d *schema.ResourceData, meta interface{}) 
 	apiID := d.Get("api_id").(string)
 
 	input := &appsync.CreateFunctionInput{
-		ApiId:                  aws.String(apiID),
-		DataSourceName:         aws.String(d.Get("data_source").(string)),
-		FunctionVersion:        aws.String(d.Get("function_version").(string)),
-		Name:                   aws.String(d.Get("name").(string)),
+		ApiId:           aws.String(apiID),
+		DataSourceName:  aws.String(d.Get("data_source").(string)),
+		FunctionVersion: aws.String(d.Get("function_version").(string)),
+		Name:            aws.String(d.Get("name").(string)),
 		RequestMappingTemplate: aws.String(d.Get("request_mapping_template").(string)),
 	}
 
@@ -152,11 +152,11 @@ func resourceAwsAppsyncFunctionUpdate(d *schema.ResourceData, meta interface{}) 
 	}
 
 	input := &appsync.UpdateFunctionInput{
-		ApiId:                  aws.String(apiID),
-		DataSourceName:         aws.String(d.Get("data_source").(string)),
-		FunctionId:             aws.String(functionID),
-		FunctionVersion:        aws.String(d.Get("function_version").(string)),
-		Name:                   aws.String(d.Get("name").(string)),
+		ApiId:           aws.String(apiID),
+		DataSourceName:  aws.String(d.Get("data_source").(string)),
+		FunctionId:      aws.String(functionID),
+		FunctionVersion: aws.String(d.Get("function_version").(string)),
+		Name:            aws.String(d.Get("name").(string)),
 		RequestMappingTemplate: aws.String(d.Get("request_mapping_template").(string)),
 	}
 

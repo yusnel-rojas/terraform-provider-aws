@@ -77,9 +77,9 @@ func resourceAwsSwfDomainCreate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	input := &swf.RegisterDomainInput{
-		Name:                                   aws.String(name),
+		Name: aws.String(name),
 		WorkflowExecutionRetentionPeriodInDays: aws.String(d.Get("workflow_execution_retention_period_in_days").(string)),
-		Tags:                                   keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().SwfTags(),
+		Tags: keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().SwfTags(),
 	}
 
 	if v, ok := d.GetOk("description"); ok {

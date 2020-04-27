@@ -70,7 +70,7 @@ func resourceAwsCodeCommitRepositoryCreate(d *schema.ResourceData, meta interfac
 	input := &codecommit.CreateRepositoryInput{
 		RepositoryName:        aws.String(d.Get("repository_name").(string)),
 		RepositoryDescription: aws.String(d.Get("description").(string)),
-		Tags:                  keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().CodecommitTags(),
+		Tags: keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().CodecommitTags(),
 	}
 
 	out, err := conn.CreateRepository(input)

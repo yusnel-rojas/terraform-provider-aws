@@ -95,7 +95,7 @@ func resourceAwsApiGatewayV2DomainNameCreate(d *schema.ResourceData, meta interf
 	req := &apigatewayv2.CreateDomainNameInput{
 		DomainName:               aws.String(d.Get("domain_name").(string)),
 		DomainNameConfigurations: expandApiGatewayV2DomainNameConfiguration(d.Get("domain_name_configuration").([]interface{})),
-		Tags:                     keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().Apigatewayv2Tags(),
+		Tags: keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().Apigatewayv2Tags(),
 	}
 
 	log.Printf("[DEBUG] Creating API Gateway v2 domain name: %s", req)

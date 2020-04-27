@@ -154,7 +154,7 @@ func resourceAwsDocDBClusterParameterGroupRead(d *schema.ResourceData, meta inte
 
 	describeParametersOpts := &docdb.DescribeDBClusterParametersInput{
 		DBClusterParameterGroupName: aws.String(d.Id()),
-		Source:                      aws.String("user"),
+		Source: aws.String("user"),
 	}
 
 	describeParametersResp, err := conn.DescribeDBClusterParameters(describeParametersOpts)

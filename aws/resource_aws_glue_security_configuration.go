@@ -122,7 +122,7 @@ func resourceAwsGlueSecurityConfigurationCreate(d *schema.ResourceData, meta int
 
 	input := &glue.CreateSecurityConfigurationInput{
 		EncryptionConfiguration: expandGlueEncryptionConfiguration(d.Get("encryption_configuration").([]interface{})),
-		Name:                    aws.String(name),
+		Name: aws.String(name),
 	}
 
 	log.Printf("[DEBUG] Creating Glue Security Configuration: %s", input)

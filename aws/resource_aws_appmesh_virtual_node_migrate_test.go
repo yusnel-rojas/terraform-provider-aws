@@ -34,7 +34,7 @@ func TestAWSAppmeshVirtualNodeMigrateState(t *testing.T) {
 				"spec.0.service_discovery.0.dns.0.service_name": "serviceb.simpleapp.local",
 			},
 			Expected: map[string]string{
-				"spec.0.backend.#": "1",
+				"spec.0.backend.#":                                                 "1",
 				"spec.0.backend.2622272660.virtual_service.#":                      "1",
 				"spec.0.backend.2622272660.virtual_service.0.virtual_service_name": "servicea.simpleapp.local",
 				"spec.0.service_discovery.#":                                       "1",

@@ -17,7 +17,7 @@ func TestAccAWSCloudformationExportDataSource_basic(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config:                    testAccCheckAwsCloudformationExportConfigStaticValue(rName),
+				Config: testAccCheckAwsCloudformationExportConfigStaticValue(rName),
 				PreventPostDestroyRefresh: true,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr(dataSourceName, "value", "waiter"),
@@ -37,7 +37,7 @@ func TestAccAWSCloudformationExportDataSource_ResourceReference(t *testing.T) {
 		Providers: testAccProviders,
 		Steps: []resource.TestStep{
 			{
-				Config:                    testAccCheckAwsCloudformationExportConfigResourceReference(rName),
+				Config: testAccCheckAwsCloudformationExportConfigResourceReference(rName),
 				PreventPostDestroyRefresh: true,
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttrPair(dataSourceName, "exporting_stack_id", resourceName, "id"),

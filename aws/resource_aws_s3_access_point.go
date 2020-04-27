@@ -129,9 +129,9 @@ func resourceAwsS3AccessPointCreate(d *schema.ResourceData, meta interface{}) er
 	name := d.Get("name").(string)
 
 	input := &s3control.CreateAccessPointInput{
-		AccountId:                      aws.String(accountId),
-		Bucket:                         aws.String(d.Get("bucket").(string)),
-		Name:                           aws.String(name),
+		AccountId: aws.String(accountId),
+		Bucket:    aws.String(d.Get("bucket").(string)),
+		Name:      aws.String(name),
 		PublicAccessBlockConfiguration: expandS3AccessPointPublicAccessBlockConfiguration(d.Get("public_access_block_configuration").([]interface{})),
 		VpcConfiguration:               expandS3AccessPointVpcConfiguration(d.Get("vpc_configuration").([]interface{})),
 	}

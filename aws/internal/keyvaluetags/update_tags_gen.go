@@ -189,7 +189,7 @@ func AcmpcaUpdateTags(conn *acmpca.ACMPCA, identifier string, oldTagsMap interfa
 	if removedTags := oldTags.Removed(newTags); len(removedTags) > 0 {
 		input := &acmpca.UntagCertificateAuthorityInput{
 			CertificateAuthorityArn: aws.String(identifier),
-			Tags:                    removedTags.IgnoreAws().AcmpcaTags(),
+			Tags: removedTags.IgnoreAws().AcmpcaTags(),
 		}
 
 		_, err := conn.UntagCertificateAuthority(input)
@@ -202,7 +202,7 @@ func AcmpcaUpdateTags(conn *acmpca.ACMPCA, identifier string, oldTagsMap interfa
 	if updatedTags := oldTags.Updated(newTags); len(updatedTags) > 0 {
 		input := &acmpca.TagCertificateAuthorityInput{
 			CertificateAuthorityArn: aws.String(identifier),
-			Tags:                    updatedTags.IgnoreAws().AcmpcaTags(),
+			Tags: updatedTags.IgnoreAws().AcmpcaTags(),
 		}
 
 		_, err := conn.TagCertificateAuthority(input)

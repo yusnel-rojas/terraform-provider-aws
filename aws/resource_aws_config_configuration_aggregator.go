@@ -118,7 +118,7 @@ func resourceAwsConfigConfigurationAggregatorPut(d *schema.ResourceData, meta in
 
 	req := &configservice.PutConfigurationAggregatorInput{
 		ConfigurationAggregatorName: aws.String(name),
-		Tags:                        keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().ConfigserviceTags(),
+		Tags: keyvaluetags.New(d.Get("tags").(map[string]interface{})).IgnoreAws().ConfigserviceTags(),
 	}
 
 	account_aggregation_sources := d.Get("account_aggregation_source").([]interface{})
